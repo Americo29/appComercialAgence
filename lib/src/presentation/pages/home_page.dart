@@ -1,5 +1,6 @@
-import 'package:agencedb/src/model/usuarios.dart';
-import 'package:agencedb/src/providers/usuarios_provider.dart';
+import 'package:agencedb/src/model/salario.dart';
+import 'package:agencedb/src/model/usuario.dart';
+import 'package:agencedb/src/providers/usuario_provider.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,10 +23,10 @@ static const String routeName = 'home';
   Widget _lista(){
         
     return FutureBuilder(
-      future: usuariosProvider.cargarData(),      
-      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+      future: usuariosProvider.loadTableUsuario(),      
+      builder: (BuildContext context, AsyncSnapshot<List<Usuario>> snapshot) {
         if(snapshot.hasData){
-          // print(snapshot.data.last);
+          // print(snapshot.data[]);
           return ListView( children: _listItem(snapshot.data, context)
           );
           // return ListView.builder(
@@ -47,14 +48,15 @@ static const String routeName = 'home';
 
   }
 
-  List<Widget> _listItem(List<dynamic> data, BuildContext context){
+  List<Widget> _listItem(List<Usuario> data, BuildContext context){
 
     final List<Widget> opciones = [];
 
-        data.forEach((opt){
+      data.forEach((opt){
 
       final widgetTemp = ListTile(
-        title: Text('${opt['co_usuario'].toString()}'),
+        title: Text('${opt.coUsuario}'),
+        // subtitle: Text('${opt.nuCep}'),
         // leading: Icon(Icons.data_usage),
         // trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
         onTap: (){},

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:agencedb/src/model/usuarios.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -28,40 +27,40 @@ class DBProvider {
   initDB() async {
 
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-
     final path = join( documentsDirectory.path, 'caolDB.db' ); 
 
-    if(FileSystemEntity.typeSync(path) == FileSystemEntityType.notFound){
-      
+    if(FileSystemEntity.typeSync(path) == FileSystemEntityType.notFound){    
       ByteData data = await rootBundle.load(join('data', 'caol.db'));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-
       await new File(path).writeAsBytes(bytes);
     }
-
-    return await openDatabase(path,version: 1,onOpen: (db){});
-    
-
+    return await openDatabase(path,version: 1,onOpen: (db){});    
   }
 
-  nuevoUsuario(CaoUser nuevoUser) async {
-    final db = await database;
-
-    final resp = db.insert('cao_usuario', nuevoUser.toJson());
-
-    return resp;
-
-  }
-
-  Future<List<dynamic>> getAllData() async {
+  Future<List<dynamic>> getTable(int option) async {
     
+    List<Map> resp = [];    
     final db = await database;
-    List<Map> resp = await db.query('cao_salario');
 
+    switch (option) {
+      case 0:
+        resp = await db.query('cao_usuario');
+        break;
+      case 1:
+        resp = await db.query('cao_salario');
+        break;
+      case 2:
+        resp = await db.query('cao_fatura');
+        break;
+      case 3:
+        resp = await db.query('cao_os');
+        break;
+      case 4:
+        resp = await db.query('cao_permissao_sistema');
+        break;
+      default:
+    }
     return resp.isNotEmpty ? resp : Null; 
-
   }
-
-
 
 }
