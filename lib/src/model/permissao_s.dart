@@ -23,7 +23,7 @@ class PermissaoSistema {
   int coSistema;
   String inAtivo;
   String coUsuarioAtualizacao;
-  int dtAtualizacao;
+  String dtAtualizacao;
 
   PermissaoSistema({
     this.coUsuario,

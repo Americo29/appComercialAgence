@@ -4,8 +4,8 @@ import 'db_provider.dart';
 
 class _FaturasProvider {
   
-  Future<List<Fatura>> loadTableUsuario() async {
-    final dataList = await DBProvider.db.getTable(0);
+  Future<List<Fatura>> loadTableFaturas() async {
+    final dataList = await DBProvider.db.getTable(2);
     final resp = Faturas.fromJsonList(dataList);
     return resp.faturas;
   }

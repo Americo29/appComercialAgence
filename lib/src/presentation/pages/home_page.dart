@@ -1,5 +1,7 @@
+import 'package:agencedb/src/model/permissao_s.dart';
 import 'package:agencedb/src/model/salario.dart';
 import 'package:agencedb/src/model/usuario.dart';
+import 'package:agencedb/src/providers/permissaoS_provider.dart';
 import 'package:agencedb/src/providers/usuario_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +25,8 @@ static const String routeName = 'home';
   Widget _lista(){
         
     return FutureBuilder(
-      future: usuariosProvider.loadTableUsuario(),      
-      builder: (BuildContext context, AsyncSnapshot<List<Usuario>> snapshot) {
+      future: permissaoProvider.loadTablePermissao(),     
+      builder: (BuildContext context, AsyncSnapshot<List<PermissaoSistema>> snapshot) {
         if(snapshot.hasData){
           // print(snapshot.data[]);
           return ListView( children: _listItem(snapshot.data, context)
@@ -48,7 +50,7 @@ static const String routeName = 'home';
 
   }
 
-  List<Widget> _listItem(List<Usuario> data, BuildContext context){
+  List<Widget> _listItem(List<PermissaoSistema> data, BuildContext context){
 
     final List<Widget> opciones = [];
 

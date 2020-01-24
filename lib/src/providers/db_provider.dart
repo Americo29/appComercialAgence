@@ -55,8 +55,8 @@ class DBProvider {
       case 3:
         resp = await db.query('cao_os');
         break;
-      case 4:
-        resp = await db.query('cao_permissao_sistema');
+      case 4:                      
+        resp = await db.rawQuery('SELECT * FROM permissao_sistema INNER JOIN cao_usuario ON permissao_sistema.co_usuario = cao_usuario.co_usuario WHERE (co_tipo_usuario IN (?, ?, ?) AND in_ativo IN (?) AND co_sistema IN (?))', ['0', '1', '2', 'S', '1']);
         break;
       default:
     }
