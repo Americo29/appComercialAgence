@@ -17,7 +17,7 @@ class PermissaosSistemas{
 
 
 class PermissaoSistema {
-
+  bool filtered;
   String coUsuario;
   int coTipoUsuario;
   int coSistema;
@@ -26,6 +26,7 @@ class PermissaoSistema {
   String dtAtualizacao;
 
   PermissaoSistema({
+    this.filtered = false,
     this.coUsuario,
     this.coTipoUsuario,
     this.coSistema,
@@ -55,4 +56,17 @@ class PermissaoSistema {
     "dt_atualizacao"          : dtAtualizacao,
 
   };
+
+  PermissaoSistema copyWith({ bool filtered, String coUsuario, int coTipoUsuario, int coSistema, String inAtivo, String coUsuarioAtualizacao, String dtAtualizacao,}){
+    return PermissaoSistema(
+      filtered: filtered ?? this.filtered,
+      coUsuario: coUsuario ?? this.coUsuario,
+      coTipoUsuario: coTipoUsuario ?? this.coTipoUsuario,
+      coSistema: coSistema ?? this.coSistema,
+      inAtivo: inAtivo ?? this.inAtivo,
+      coUsuarioAtualizacao: coUsuarioAtualizacao ?? this.coUsuarioAtualizacao,
+      dtAtualizacao: dtAtualizacao ?? this.dtAtualizacao,
+    );
+  }
+
 }

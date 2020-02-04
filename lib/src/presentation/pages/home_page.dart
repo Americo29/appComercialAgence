@@ -1,77 +1,73 @@
-import 'package:agencedb/src/model/permissao_s.dart';
-import 'package:agencedb/src/model/salario.dart';
-import 'package:agencedb/src/model/usuario.dart';
-import 'package:agencedb/src/providers/permissaoS_provider.dart';
-import 'package:agencedb/src/providers/usuario_provider.dart';
+import 'package:agencedb/src/blocs/filtered/filtered_bloc.dart';
+import 'package:agencedb/src/blocs/tab/tab_bloc.dart';
+import 'package:agencedb/src/model/app_tab.dart';
+import 'package:agencedb/src/presentation/pages/splash_page.dart';
+import 'package:agencedb/src/presentation/widgets/extra_actions.dart';
+import 'package:agencedb/src/presentation/widgets/filter_button.dart';
+import 'package:agencedb/src/presentation/widgets/filtered.dart';
 import 'package:flutter/material.dart';
-
-
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:agencedb/src/blocs/blocs.dart';
+import 'package:agencedb/src/model/permissao_s.dart';
 
 class HomePage extends StatelessWidget {
-static const String routeName = 'home';
-  
-  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Agence home'),
-      ),
-      body: _lista(),
-    );
+    return BlocBuilder<TabBloc, AppTab>(builder: (context, activeTab) {
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('Agence home'),
+            actions: [
+              FilterButton(visible: activeTab == AppTab.todos),
+              ExtraActions(),
+            ],
+          ),
+          body: activeTab == AppTab.todos ? FilteredConsultores() : SplashPage(),
+          
+          // BlocProvider<FilteredTodosBloc>(
+          //   create: (context) => FilteredTodosBloc(
+          //     todosBloc: BlocProvider.of<ConsultoresBloc>(context),
+          //   ),
+          //   child: 
+          // )
+          // body: BlocListener<ConsultoresBloc, ConsultoresState>(
+          //   listener: (context, state){
+          //     if (state is ConsultoresFailureState) {
+          //       Scaffold.of(context).showSnackBar(SnackBar(
+          //         content: Text('error desconocido: ${state.error}'),
+          //         backgroundColor: Colors.red,
+          //       ));
+          //     }
+          //   },
+          //   child: BlocBuilder<ConsultoresBloc, ConsultoresState>(
+          //     builder: (context, state){
+          //       if (state is ConsultoresInitializedState) {
+          //         return ListView(
+          //           children: _listItem(state.datalist, context),
+          //         );
+          //       }
+          //     },
+          //   ),
+          // )
+          );
+    });
   }
 
-  Widget _lista(){
-        
-    return FutureBuilder(
-      future: permissaoProvider.loadTablePermissao(),     
-      builder: (BuildContext context, AsyncSnapshot<List<PermissaoSistema>> snapshot) {
-        if(snapshot.hasData){
-          // print(snapshot.data[]);
-          return ListView( children: _listItem(snapshot.data, context)
-          );
-          // return ListView.builder(
-          //   itemCount: snapshot.data.length,
-          //   itemBuilder: (BuildContext context, int index) {
-          //   return ListTile(
-          //     title: Text('${snapshot.data[index].co_usuario}'),
-          //   );
-          //  },
-          // );
-        }else{
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        
-      },
-    );
-
-  }
-
-  List<Widget> _listItem(List<PermissaoSistema> data, BuildContext context){
-
+  List<Widget> _listItem(List<PermissaoSistema> data, BuildContext context) {
     final List<Widget> opciones = [];
 
-      data.forEach((opt){
-
+    data.forEach((opt) {
       final widgetTemp = ListTile(
         title: Text('${opt.coUsuario}'),
         // subtitle: Text('${opt.nuCep}'),
         // leading: Icon(Icons.data_usage),
         // trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
-        onTap: (){},
-
+        onTap: () {},
       );
 
-      opciones..add(widgetTemp)
-              ..add(Divider());
-
+      opciones..add(widgetTemp)..add(Divider());
     });
 
     return opciones;
-    
   }
-
 }

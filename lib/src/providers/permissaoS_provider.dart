@@ -3,7 +3,7 @@ import 'db_provider.dart';
 
 
 
-class _PermissaosProvider {  
+class PermissaosProvider {  
 
   Future<List<PermissaoSistema>> loadTablePermissao() async {
     final dataList = await DBProvider.db.getTable(4);
@@ -12,4 +12,4 @@ class _PermissaosProvider {
   }
 }
 
-final permissaoProvider = new _PermissaosProvider();
+// final permissaoProvider = new _PermissaosProvider();
