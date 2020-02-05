@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:agencedb/src/presentation/widgets/graphcircular.dart';
 import 'package:agencedb/src/model/models.dart';
 import 'package:agencedb/src/blocs/tab/tab_bloc.dart';
 import 'package:agencedb/src/presentation/widgets/widgets.dart';
@@ -19,7 +20,8 @@ class HomePage extends StatelessWidget {
           ),
           body: activeTab == AppTab.todos ? FilteredConsultores() : 
                 activeTab == AppTab.stats ? Stats() : 
-                activeTab == AppTab.relation ? RelationScreen() : GraphBarScreen(),
+                activeTab == AppTab.relation ? RelationScreen() :
+                activeTab == AppTab.graphbar ? GraphBarScreen.withSampleData() : GraphCircularScreen.withSampleData(),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
             onTabSelected: (tab) =>
