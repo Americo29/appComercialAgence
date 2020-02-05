@@ -27,6 +27,11 @@ void main() {
             todosBloc: BlocProvider.of<ConsultoresBloc>(context),
           ),
         ),
+        BlocProvider<RelationBloc>(
+          create: (context) => RelationBloc(
+            todosBloc: BlocProvider.of<ConsultoresBloc>(context),
+          ),
+        ),
         BlocProvider<FilteredTodosBloc>(
           create: (context) => FilteredTodosBloc(
             todosBloc: BlocProvider.of<ConsultoresBloc>(context),

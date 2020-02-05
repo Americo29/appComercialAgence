@@ -30,14 +30,19 @@ class TodoItem extends StatelessWidget {
       title: Hero(
         tag: '${consultoresPS.coUsuario}', 
         child: Container(
-          width: MediaQuery.of(context).size.width,
+          // alignment: Alignment.topLeft,
+          // width: MediaQuery.of(context).size.width,
           child: Text(
             consultoresPS.coUsuario,
-            style: Theme.of(context).textTheme.title
+             style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18.0,
+                  color: Colors.black87
+                ), 
           ),
         )
       ),
-      subtitle: Text(consultoresPS.coUsuarioAtualizacao)
+      // subtitle: Text(consultoresPS.coUsuarioAtualizacao)
     );
   }
 }

@@ -7,3 +7,4 @@ export 'relation.dart';
 export 'stats.dart';
 export 'tab_selector.dart';
 export 'todo_item.dart';
+export 'datatable.dart';
