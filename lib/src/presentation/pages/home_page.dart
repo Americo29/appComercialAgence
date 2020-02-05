@@ -1,16 +1,9 @@
-import 'package:agencedb/src/blocs/filtered/filtered_bloc.dart';
-import 'package:agencedb/src/blocs/tab/tab_bloc.dart';
-import 'package:agencedb/src/model/app_tab.dart';
-import 'package:agencedb/src/presentation/pages/splash_page.dart';
-import 'package:agencedb/src/presentation/widgets/extra_actions.dart';
-import 'package:agencedb/src/presentation/widgets/filter_button.dart';
-import 'package:agencedb/src/presentation/widgets/filtered.dart';
-import 'package:agencedb/src/presentation/widgets/stats.dart';
-import 'package:agencedb/src/presentation/widgets/tab_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:agencedb/src/blocs/blocs.dart';
-import 'package:agencedb/src/model/permissao_s.dart';
+
+import 'package:agencedb/src/model/models.dart';
+import 'package:agencedb/src/blocs/tab/tab_bloc.dart';
+import 'package:agencedb/src/presentation/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -24,8 +17,10 @@ class HomePage extends StatelessWidget {
               ExtraActions(),
             ],
           ),
-          body: activeTab == AppTab.todos ? FilteredConsultores() : Stats(),
-             bottomNavigationBar: TabSelector(
+          body: activeTab == AppTab.todos ? FilteredConsultores() : 
+                activeTab == AppTab.stats ? Stats() : 
+                activeTab == AppTab.relation ? RelationScreen() : GraphBarScreen(),
+          bottomNavigationBar: TabSelector(
             activeTab: activeTab,
             onTabSelected: (tab) =>
                 BlocProvider.of<TabBloc>(context).add(UpdateTab(tab)),

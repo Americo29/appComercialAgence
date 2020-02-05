@@ -16,20 +16,23 @@ class TabSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      // key: ArchSampleKeys.tabs,
-      currentIndex: AppTab.values.indexOf(activeTab),
+      type: BottomNavigationBarType.fixed,      
+      currentIndex: AppTab.values.indexOf(activeTab),      
       onTap: (index) => onTabSelected(AppTab.values[index]),
       items: AppTab.values.map((tab) {
         return BottomNavigationBarItem(
-          icon: Icon(
-            tab == AppTab.todos ? Icons.list : Icons.show_chart,
-            // key: tab == AppTab.todos
-            //     ? ArchSampleKeys.todoTab
-            //     : ArchSampleKeys.statsTab,
+          icon: Icon(            
+            tab == AppTab.todos ? Icons.list : 
+            tab == AppTab.stats ? Icons.shuffle :
+            tab == AppTab.relation ? Icons.storage : 
+            tab == AppTab.graphbar ? Icons.sort : Icons.timelapse,            
           ),
-          title: Text(tab == AppTab.stats
-              ? 'Stats'
-              : 'Todos'),
+          title: Text(
+            tab == AppTab.stats ? 'Stats': 
+            tab == AppTab.todos ? 'Todos': 
+            tab == AppTab.relation ? 'Relación': 
+            tab == AppTab.graphbar ? 'Barras': 'Circular',
+          ),
         );
       }).toList(),
     );

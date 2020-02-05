@@ -1,15 +1,11 @@
-import 'package:agencedb/src/blocs/filtered/filtered_bloc.dart';
-import 'package:agencedb/src/blocs/stats/stats_bloc.dart';
-import 'package:agencedb/src/blocs/tab/tab_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:agencedb/src/blocs/bloc_consultores/consultores_bloc.dart';
-import 'package:agencedb/src/blocs/bloc_delegate.dart';
-import 'package:agencedb/src/presentation/pages/home_page.dart';
-import 'package:agencedb/src/presentation/pages/splash_page.dart';
+import 'package:agencedb/src/presentation/pages/pages.dart';
+import 'package:agencedb/src/blocs/blocs.dart';
+import 'package:agencedb/src/presentation/widgets/widgets.dart';
 import 'package:agencedb/src/repositories/agence_repository.dart';
-import 'package:agencedb/src/presentation/widgets/loading_indicator.dart';
+
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();

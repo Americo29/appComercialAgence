@@ -39,13 +39,6 @@ class ExtraActions extends StatelessWidget {
                       : 'Marcar todos activos',
                 ),
               ),
-              // PopupMenuItem<ExtraAction>(
-              //   // key: ArchSampleKeys.clearCompleted,
-              //   value: ExtraAction.clearCompleted,
-              //   child: Text('ClearCompleted'
-              //     // ArchSampleLocalizations.of(context).clearCompleted,
-              //   ),
-              // ),
             ],
           );
         }
